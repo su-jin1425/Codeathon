@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="a1.css">
+    <title>Aurora AI Assistant</title>
+</head>
+<body>
+    <div id="aurora-chat-wrapper" class="aurora-chat-wrapper">
+        <div id="aurora-chat-toggle" class="aurora-chat-toggle">
+            <i class='bx bx-bot'></i>
+        </div>
+        <div id="aurora-chat-container" class="aurora-chat-container">
+            <div class="aurora-chat-header">
+                <div class="aurora-chat-title">
+                    <i class='bx bx-planet'></i>
+                    <h3>Aurora</h3>
+                </div>
+                <button id="aurora-chat-close" class="aurora-chat-close"><i class='bx bx-x'></i></button>
+            </div>
+            <div id="aurora-chat-messages" class="aurora-chat-messages">
+                <div class="aurora-chat-welcome">Greetings! I'm Aurora, your AI assistant. How may I assist you today?</div>
+            </div>
+            <div class="aurora-chat-input">
+                <textarea id="aurora-chat-input" placeholder="Type your message..." rows="1"></textarea>
+                <button id="aurora-chat-send" type="submit"><i class='bx bx-send'></i></button>
+            </div>
+        </div>
+    </div>
+   
+    <script src="a1.js"></script>
+</body>
+</html>
