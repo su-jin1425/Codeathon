@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Caterpillar Inc.</title>
+    <meta name="description" content="Interaction Designer & Creative Coder">
+    <link rel="icon" type="image/x-icon" href="img/cat.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  </head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFMCMFW05V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WFMCMFW05V');
+</script>
+  <body>
+    <div id="portrait-container">
+      <img id="portrait" src="img/cat.png" width="80" height="80"></img>
+      <h1>Caterpillar Inc.</h1>
+      <p style="white-space: nowrap;">Let’s do the work.</p>
+    </div>
+    <div id="anchor"></div>
+    <div id="debugCircle"><div id="indicator"></div></div>
+    <div id="permission" onclick="requestPermission()">Clickbait</div>
+    <a class="link-container" id="firstLink" href="https://su-jin1425.github.io/My_Portfolio/" style="background: linear-gradient(-45deg, #FFCC00, #FFD700);"></img><div class="link">🛠️ Predicting failures from past data. 📉</div></a>
+    <a class='link-container' href='https://failure-register-form-caterpillar14.vercel.app' style='background: linear-gradient(-45deg, #6E6E6E, #A9A9A9);'><div class="link">📋 Failure Register Form 🚧</div></a>
+    <a class="link-container" href="https://parts-validator-caterpillar.vercel.app" style="background: linear-gradient(-45deg, #FF9900, #FFCC00);"><div class="link">Parts Validator 🔍</div></a>
+    <a class="link-container" href="https://su-jin1425.github.io/Game_Space/" style="background: linear-gradient(-45deg, #8B4513, #D2691E);"><div class="link">🎮 Game Space</div></a>
+    <a class="link-container" href="https://su-jin1425.github.io/Coffee_With_Me/" style="background: linear-gradient(-45deg, #555555, #777777);"><div class="link">Buy me a Coffee 🧋</div></a>
+    <script src="js/matter.js"></script>
+    <script src="js/physics.js"></script>
+  </div>
+  <div id="aurora-chat-wrapper" class="aurora-chat-wrapper">
+    <div id="aurora-chat-toggle" class="aurora-chat-toggle">
+        <i class='bx bx-bot'></i>
+    </div>
+    <div id="aurora-chat-container" class="aurora-chat-container">
+        <div class="aurora-chat-header">
+            <div class="aurora-chat-title">
+                <i class='bx bx-planet'></i>
+                <h3>Aurora</h3>
+            </div>
+            <button id="aurora-chat-close" class="aurora-chat-close"><i class='bx bx-x'></i></button>
+        </div>
+        <div id="aurora-chat-messages" class="aurora-chat-messages">
+            <div class="aurora-chat-welcome">Greetings! I'm Aurora, your AI assistant. How may I assist you today?</div>
+        </div>
+        <div class="aurora-chat-input">
+            <textarea id="aurora-chat-input" placeholder="Type your message..." rows="1"></textarea>
+            <button id="aurora-chat-send" type="submit"><i class='bx bx-send'></i></button>
+        </div>
+    </div>
+  </div>
+  </body>
+  <script>
+    const auroraChatToggle = document.getElementById('aurora-chat-toggle');
+  const auroraChatContainer = document.getElementById('aurora-chat-container');
+  const auroraChatClose = document.getElementById('aurora-chat-close');
+  const auroraChatMessages = document.getElementById('aurora-chat-messages');
+  const auroraChatInput = document.getElementById('aurora-chat-input');
+  const auroraChatSend = document.getElementById('aurora-chat-send');
+  
+  auroraChatToggle.addEventListener('click', toggleAuroraChat);
+  auroraChatClose.addEventListener('click', toggleAuroraChat);
+  auroraChatSend.addEventListener('click', sendAuroraMessage);
+  auroraChatInput.addEventListener('keypress', handleAuroraEnter);
+  auroraChatInput.addEventListener('input', adjustAuroraInputHeight);
+  auroraChatMessages.addEventListener('click', function(event) {
+      if (event.target.classList.contains('aurora-link')) {
+          handleAuroraLinkClick(event);
+      }
+  });
+  
+  function toggleAuroraChat() {
+      const isVisible = auroraChatContainer.style.display === 'block';
+      auroraChatContainer.style.display = isVisible ? 'none' : 'block';
+      auroraChatToggle.style.display = isVisible ? 'flex' : 'none';
+  }
+  
+  function sendAuroraMessage() {
+      const message = auroraChatInput.value.trim();
+      if (message) {
+          addAuroraMessage(message, 'sent');
+          auroraChatInput.value = '';
+          adjustAuroraInputHeight();
+          setTimeout(() => {
+              const response = getAuroraResponse(message);
+              addAuroraMessage(response, 'received');
+          }, 1000);
+      }
+  }
+  
+  function handleAuroraEnter(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendAuroraMessage();
+      }
+  }
+  
+  function adjustAuroraInputHeight() {
+      auroraChatInput.style.height = 'auto';
+      auroraChatInput.style.height = auroraChatInput.scrollHeight + 'px';
+  }
+  
+  function addAuroraMessage(message, type) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('aurora-chat-message', type);
+      messageElement.innerHTML = message;
+      auroraChatMessages.appendChild(messageElement);
+      auroraChatMessages.scrollTop = auroraChatMessages.scrollHeight;
+  }
+  
+  function getAuroraResponse(message) {
+      const responses = [
+          `I've analyzed your query. You might find this information helpful: <a href='#' class='aurora-link' data-href='https://www.example.com/info'>Explore Further</a>`,
+          `Interesting question! I've compiled some relevant data here: <a href='#' class='aurora-link' data-href='https://www.example.com/data'>View Analysis</a>`,
+          `Based on your input, I recommend checking out this resource: <a href='#' class='aurora-link' data-href='https://www.example.com/resource'>Learn More</a>`,
+          `I've processed your request. This link might provide additional context: <a href='#' class='aurora-link' data-href='https://www.example.com/context'>Detailed Insights</a>`,
+          `Your inquiry is intriguing. I've found some relevant information here: <a href='#' class='aurora-link' data-href='https://www.example.com/discover'>Discover More</a>`
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+  }
+  
+  function handleAuroraLinkClick(event) {
+      event.preventDefault();
+      const href = event.target.getAttribute('data-href');
+      if (href) {
+          window.open(href, '_blank');
+      }
+  }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+  
+  .aurora-chat-wrapper {
+      --aurora-bg: #1A1A2E;
+      --aurora-surface: #16213E;
+      --aurora-primary: #0F3460;
+      --aurora-secondary: #E94560;
+      --aurora-text: #FFFFFF;
+      --aurora-input: #0F3460;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+  }
+  
+  .aurora-chat-wrapper * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  .aurora-chat-toggle {
+      width: 4rem;
+      height: 4rem;
+      background: var(--aurora-primary);
+      color: var(--aurora-text);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(15, 52, 96, 0.5);
+  }
+  
+  .aurora-chat-toggle i {
+      font-size: 2rem;
+  }
+  
+  .aurora-chat-toggle:hover {
+      background: var(--aurora-secondary);
+      transform: translateY(-3px);
+  }
+  
+  .aurora-chat-container {
+      position: absolute;
+      bottom: calc(100% + 1rem);
+      right: 0;
+      width: 380px;
+      background: var(--aurora-surface);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: none;
+  }
+  
+  .aurora-chat-header {
+      background: var(--aurora-primary);
+      color: var(--aurora-text);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .aurora-chat-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+  
+  .aurora-chat-title i {
+      font-size: 1.5rem;
+  }
+  
+  .aurora-chat-title h3 {
+      font-weight: 700;
+      font-size: 1.2rem;
+  }
+  
+  .aurora-chat-close {
+      background: none;
+      border: none;
+      color: var(--aurora-text);
+      cursor: pointer;
+      font-size: 1.5rem;
+  }
+  
+  .aurora-chat-messages {
+      height: 350px;
+      overflow-y: auto;
+      padding: 1rem;
+  }
+  
+  .aurora-chat-welcome {
+      background: var(--aurora-input);
+      color: var(--aurora-text);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+  }
+  
+  .aurora-chat-input {
+      display: flex;
+      padding: 1rem;
+      background: var(--aurora-surface);
+      border-top: 1px solid var(--aurora-input);
+  }
+  
+  .aurora-chat-input textarea {
+      flex-grow: 1;
+      background: var(--aurora-input);
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: var(--aurora-text);
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      resize: none;
+      max-height: 120px;
+  }
+  
+  .aurora-chat-input button {
+      background: var(--aurora-secondary);
+      color: var(--aurora-text);
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+  }
+  
+  .aurora-chat-input button:hover {
+      background: #D62E4E;
+  }
+  
+  .aurora-chat-message {
+      margin-bottom: 1rem;
+      max-width: 85%;
+  }
+  
+  .aurora-chat-message.sent {
+      margin-left: auto;
+      background: var(--aurora-secondary);
+      color: var(--aurora-text);
+      border-radius: 15px 15px 0 15px;
+      padding: 0.75rem 1rem;
+  }
+  
+  .aurora-chat-message.received {
+      background: var(--aurora-input);
+      color: var(--aurora-text);
+      border-radius: 15px 15px 15px 0;
+      padding: 0.75rem 1rem;
+  }
+  
+  .aurora-chat-messages::-webkit-scrollbar {
+      width: 6px;
+  }
+  
+  .aurora-chat-messages::-webkit-scrollbar-track {
+      background: var(--aurora-surface);
+  }
+  
+  .aurora-chat-messages::-webkit-scrollbar-thumb {
+      background-color: var(--aurora-secondary);
+      border-radius: 20px;
+  }
+  
+  .aurora-chat-message a {
+      color: var(--aurora-secondary);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+  }
+  
+  .aurora-chat-message a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--aurora-secondary);
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+  }
+  
+  .aurora-chat-message a:hover {
+      color: #fff;
+  }
+  
+  .aurora-chat-message a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+  }
+  </style>
+</html>
+
