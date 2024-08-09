@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css?family=Parisienne|Poppins:400,600,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #8e44ad, #c39bd3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.wrapper {
+  max-width: 800px;
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  padding: 50px;
+}
+
+.wrapper .title {
+  font-family: 'Parisienne', cursive;
+  font-size: 48px;
+  font-weight: normal;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #8e44ad;
+}
+
+.wrapper .form {
+  width: 100%;
+}
+
+.wrapper .form .inputfield {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.wrapper .form .inputfield label {
+  width: 200px;
+  color: #757575;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+.wrapper .form .inputfield .input,
+.wrapper .form .inputfield .textarea {
+  width: 100%;
+  outline: none;
+  border: none;
+  background: #f2f2f2;
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.wrapper .form .inputfield .textarea {
+  width: 100%;
+  height: 150px;
+  resize: none;
+}
+
+.wrapper .form .inputfield .custom_select {
+  position: relative;
+  width: 100%;
+  height: 48px;
+}
+
+.wrapper .form .inputfield .custom_select:before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  border: 8px solid;
+  border-color: #757575 transparent transparent transparent;
+  pointer-events: none;
+}
+
+.wrapper .form .inputfield .custom_select select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #f2f2f2;
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .form .inputfield .input:focus,
+.wrapper .form .inputfield .textarea:focus,
+.wrapper .form .inputfield .custom_select select:focus {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper .form .inputfield p {
+  font-size: 16px;
+  color: #757575;
+}
+
+.wrapper .form .inputfield .check {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.wrapper .form .inputfield .check input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.wrapper .form .inputfield .check .checkmark {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #8e44ad;
+  display: block;
+  position: relative;
+  border-radius: 6px;
+}
+
+.wrapper .form .inputfield .check .checkmark:before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 8px;
+  border: 2px solid;
+  border-color: transparent transparent #fff #fff;
+  transform: rotate(-45deg);
+  display: none;
+}
+
+.wrapper .form .inputfield .check input[type="checkbox"]:checked ~ .checkmark {
+  background: #8e44ad;
+}
+
+.wrapper .form .inputfield .check input[type="checkbox"]:checked ~ .checkmark:before {
+  display: block;
+}
+
+.wrapper .form .inputfield .btn {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 18px;
+  background: linear-gradient(135deg, #8e44ad, #c39bd3);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.wrapper .form .inputfield .btn:hover {
+  background: linear-gradient(135deg, #c39bd3, #8e44ad);
+}
+
+.wrapper .form .inputfield:last-child {
+  margin-bottom: 0;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.rating .star {
+  font-size: 3.5em;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.rating .star.selected,
+.rating .star:hover,
+.rating .star:hover ~ .star {
+  color: #fec107;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 40px;
+  }
+  .wrapper .form .inputfield {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .wrapper .form .inputfield label {
+    margin-bottom: 12px;
+  }
+  .wrapper .form .inputfield.terms {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 30px;
+  }
+  .wrapper .title {
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  .wrapper .form .inputfield label {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .rating .star {
+    font-size: 3em;
+  }
+}

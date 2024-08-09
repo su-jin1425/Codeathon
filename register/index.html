@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="a1.svg">
+  <title>Failure Register Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabaseUrl = 'https://wljcajrsuoetdpyodadh.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsamNhanJzdW9ldGRweW9kYWRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjMxOTE5NDIsImV4cCI6MjAzODc2Nzk0Mn0.XCwt42ULqxFeI7ZP60vQjrxRfyVk4R3OfxasPis3BAc';
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    function validateForm() {
+      const machine = document.getElementById('machine').value;
+      const components = document.getElementById('components').value;
+      const parameter = document.getElementById('parameter').value;
+      const value = document.getElementById('value').value.trim();
+
+      if (!machine) {
+        alert("Please select a machine.");
+        return false;
+      }
+
+      if (!components) {
+        alert("Please select a component.");
+        return false;
+      }
+
+      if (!parameter) {
+        alert("Please select a parameter.");
+        return false;
+      }
+
+      if (value === "" || isNaN(value)) {
+        alert("Please enter a valid value.");
+        return false;
+      }
+
+      return true;
+    }
+
+    async function sendFailureData(event) {
+      event.preventDefault();
+
+      if (!validateForm()) {
+        return;
+      }
+
+      const machine = document.getElementById('machine').value;
+      const components = document.getElementById('components').value;
+      const parameter = document.getElementById('parameter').value;
+      const value = document.getElementById('value').value;
+
+      const { data, error } = await supabase
+        .from('failure_register')
+        .insert([
+          { 
+            Time: new Date(),
+            Machine: machine,
+            Component: components,
+            Parameter: parameter,
+            Value: value
+          }
+        ]);
+
+      if (error) {
+        console.error('Error inserting data:', error);
+        alert('There was an error submitting your data. Please try again.');
+      } else {
+        alert('Data submitted successfully!');
+        document.getElementById('failureRegisterForm').reset();  // Clear the form
+      }
+    }
+
+    window.sendFailureData = sendFailureData;
+  </script>
+</head>
+<body>
+
+<div class="wrapper">
+  <form id="failureRegisterForm">
+    <div class="title">Failure Register Form</div>
+    <div class="form">
+
+      <div class="inputfield">
+        <label for="machine">Machine</label>
+        <div class="custom_select">
+          <select name="machine" id="machine" required>
+            <option value="" disabled selected>Select</option>
+            <option value="Articulated_Truck">Articulated Truck</option>
+            <option value="Asphalt_Paver">Asphalt Paver</option>
+            <option value="Backhoe_Loader">Backhoe Loader</option>
+            <option value="Dozer">Dozer</option>
+            <option value="Excavator">Excavator</option>
+          </select>
+        </div>
+      </div> 
+
+      <div class="inputfield">
+        <label for="components">Components</label>
+        <div class="custom_select">
+          <select name="components" id="components" required>
+            <option value="" disabled selected>Select</option>
+            <option value="Drive">Drive</option>
+            <option value="Engine">Engine</option>
+            <option value="Fuel">Fuel</option>
+            <option value="Misc">Misc</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="inputfield">
+        <label for="parameter">Parameter</label>
+        <div class="custom_select">
+          <select name="parameter" id="parameter" required>
+            <option value="" disabled selected>Select</option>
+            <option value="Air_Filter_Pressure">Air Filter Pressure</option>
+            <option value="Brake_Control">Brake Control</option>
+            <option value="Exhaust_Gas_Temperature">Exhaust Gas Temperature</option>
+            <option value="Hydraulic_Pump_Rate">Hydraulic Pump Rate</option>
+            <option value="Level">Level</option>
+            <option value="Oil_Pressure">Oil Pressure</option>
+            <option value="Pedal_Sensor">Pedal Sensor</option>
+            <option value="Pressure">Pressure</option>
+            <option value="Speed">Speed</option>
+            <option value="System_Voltage">System Voltage</option>
+            <option value="Temperature">Temperature</option>
+            <option value="Transmission_Pressure">Transmission Pressure</option>
+            <option value="Water_in_Fuel">Water in Fuel</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="inputfield">
+        <label for="value">Value</label>
+        <input type="number" step="any" id="value" name="value" class="input" required>
+      </div>
+      <div class="inputfield">
+        <input type="submit" value="Send" id="submitButton" class="btn" onclick="sendFailureData(event)">
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
